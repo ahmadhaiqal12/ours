@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter IV — The Gratitude</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{animation:popIn .7s cubic-bezier(.34,1.2,.64,1) forwards;}
+@keyframes popIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.letter-body{font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.95;color:#3D0028;}
+.letter-body p+p{margin-top:1.1em;}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<canvas id="stars"></canvas><canvas id="petals"></canvas>
+<div id="quest-hud" style="font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.18em;color:#C470A0;"><span>CHAPTER</span><div style="display:flex;gap:.5rem;"><div class="hud-dot" id="dot-0"></div><div class="hud-dot" id="dot-1"></div><div class="hud-dot" id="dot-2"></div><div class="hud-dot" id="dot-3"></div></div></div>
+<div id="music-bar"><div class="vinyl" id="vinyl"></div><div><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.8rem;color:#C2006B;">Now Playing</p><p style="font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#C470A0;">Our Song 🎵</p></div><button onclick="toggleMusic()" style="width:30px;height:30px;border-radius:50%;background:#E91E8C;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg id="music-icon" width="12" height="12" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" fill="white"/><rect x="14" y="5" width="4" height="14" fill="white"/></svg></button></div>
+<audio id="audioEl" src="lagu.mp3" loop preload="auto"></audio>
+
+<!-- Easter egg overlay -->
+<div id="egg-overlay" style="position:fixed;inset:0;z-index:8888;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;text-align:center;padding:2rem;background:radial-gradient(ellipse at center,#3D0028 0%,#0d0008 100%);" onclick="this.style.display='none'">
+  <div style="font-size:2.5rem;letter-spacing:.6rem;animation:heartbeat 1s infinite;">🌸🌹💗</div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,5vw,2.2rem);color:#fde8f3;font-weight:300;max-width:480px;line-height:1.6;">You were my favourite chapter.<br><em style="color:#f9b8d8;">Thank you for existing.</em></p>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(249,184,216,.4);">— tap anywhere to close —</p>
+</div>
+
+<div style="position:relative;z-index:2;">
+
+<!-- CHAPTER HERO -->
+<div style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 1.5rem 2rem;">
+  <span style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#C2006B;background:rgba(245,230,200,.5);border:1px solid #F5E6C8;padding:.3rem .9rem;border-radius:4px;margin-bottom:1.2rem;display:inline-block;" class="reveal">Chapter IV — Final</span>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,8vw,5rem);font-weight:300;color:#C2006B;line-height:1.1;" class="reveal">The <em style="color:#E91E8C;">Gratitude</em></h1>
+  <div style="height:1px;width:40px;background:#F9B8D8;margin:1rem auto;" class="reveal"></div>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#C470A0;font-size:1.05rem;max-width:400px;line-height:1.7;" class="reveal">"You made it. And I'm glad you did."</p>
+</div>
+
+<!-- CONFETTI BURST MESSAGE -->
+<div style="max-width:480px;margin:0 auto 3rem;padding:0 1.5rem;text-align:center;" class="reveal-scale">
+  <div style="background:linear-gradient(135deg,#FFF8EE,#FFF0F8);border:1.5px solid #F9B8D8;border-radius:20px;padding:1.5rem;box-shadow:0 12px 40px rgba(233,30,140,.08);">
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#C470A0;font-size:1.05rem;line-height:1.7;">✨ You completed all four chapters.<br>This took heart yours and mine both.</p>
+  </div>
+</div>
+
+<!-- THE LETTER -->
+<div style="max-width:580px;margin:0 auto;padding:0 1.5rem 3rem;">
+  <p style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#C470A0;text-align:center;margin-bottom:2rem;" class="reveal">✦ From the Heart, With Sincerity ✦</p>
+  <div class="parchment letter-body" style="border-radius:22px;padding:2.5rem 2rem;" class="reveal">
+    <p>Aleya Najeha,</p>
+    <p>Four years is not a short time.I dont really remember exact date but please forgive me, and in those years, you became a part of my story,one I will hold close for as long as I live.</p>
+    <p>I'm not writing this to go back. I'm writing this because you deserve to know that everything you gave, every moment we shared, meant something. It meant everything.</p>
+    <p>You have your own path now, and I genuinely hope it brings you all the happiness you deserve. Because you truly deserve the best in every sense of the word.</p>
+    <p>Thank you for your patience. Your kindness. Your laughter. For being exactly who you are.</p>
+    <p>Thank you, Aleya Najeha. For all of it.</p>
+    <p style="margin-top:1.5rem;font-style:italic;color:#C470A0;font-size:.95rem;">— with the most sincere gratitude 🌹</p>
+  </div>
+</div>
+
+<!-- CANDLE FOOTER -->
+<footer style="text-align:center;padding:3rem 1.5rem 6rem;" class="reveal">
+  <div style="display:inline-flex;flex-direction:column;align-items:center;gap:.2rem;margin-bottom:1.5rem;">
+    <div class="flame" style="animation:flicker 1.8s ease-in-out infinite alternate;"></div>
+    <div style="width:2px;height:8px;background:#5D4037;border-radius:2px;"></div>
+    <div style="width:20px;height:56px;background:linear-gradient(135deg,#fce4ec,#f48fb1);border-radius:4px 4px 2px 2px;border:1px solid #F9B8D8;"></div>
+  </div>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#C470A0;font-size:1.1rem;max-width:320px;margin:0 auto 1rem;line-height:1.8;">"Some people don't come into our lives to stay — they come to teach us how to love more deeply."</p>
+  <p id="footer-name" style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#F9B8D8;cursor:pointer;transition:color .2s;" onmouseover="this.style.color='#E91E8C'" onmouseout="this.style.color='#F9B8D8'">Aleya Najeha · Forever cherished</p>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(196,112,160,.25);font-size:.78rem;margin-top:1.5rem;">✦ tap the name above three times for a surprise ✦</p>
+
+  <!-- LAST BUTTON -->
+  <div style="margin-top:3rem;padding-bottom:2rem;">
+    <button id="last-btn" onclick="openLastPopup()" style="display:inline-flex;align-items:center;gap:.6rem;background:none;border:1.5px solid rgba(249,184,216,.5);border-radius:999px;padding:.9rem 2rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:#C470A0;cursor:pointer;transition:all .3s;letter-spacing:.04em;" onmouseover="this.style.borderColor='#E91E8C';this.style.color='#E91E8C';this.style.background='rgba(233,30,140,.04)'" onmouseout="this.style.borderColor='rgba(249,184,216,.5)';this.style.color='#C470A0';this.style.background='none'">
+      🌹 One Last Thing
+    </button>
+  </div>
+</footer>
+
+<!-- LAST POPUP -->
+<div id="last-popup" style="position:fixed;inset:0;z-index:600;display:none;align-items:center;justify-content:center;padding:1.5rem;background:rgba(13,0,8,.88);backdrop-filter:blur(10px);">
+  <div id="last-card" style="background:linear-gradient(135deg,#FFF8EE,#FFF0F8);border:1.5px solid #F9B8D8;border-radius:24px;padding:2.4rem 2rem;max-width:400px;width:100%;text-align:center;box-shadow:0 40px 100px rgba(233,30,140,.25);transform:scale(.8);opacity:0;transition:all .5s cubic-bezier(.34,1.3,.64,1);position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 14px,rgba(249,184,216,.04) 14px,rgba(249,184,216,.04) 15px);pointer-events:none;border-radius:inherit;"></div>
+    <div style="font-size:2rem;margin-bottom:1.2rem;display:block;animation:heartbeat 1.4s ease-in-out infinite;">🌹</div>
+    <p style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#C2006B;margin-bottom:1.2rem;">A Final Note</p>
+    <div id="last-text" style="font-family:'Cormorant Garamond',serif;font-size:1.08rem;line-height:1.9;color:#3D0028;font-style:italic;min-height:4em;"></div>
+    <div style="margin-top:1.8rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;">
+      <button onclick="closeLastPopup()" style="background:#E91E8C;border:none;border-radius:999px;padding:.8rem 2rem;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:white;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#C2006B'" onmouseout="this.style.background='#E91E8C'">Thank you 🌸</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="shared.js"></script>
+<script>
+initStars();initPetals();initCursor();initProgress();initHUD(3);initMusic(true);
+setTimeout(()=>{initReveal();spawnParticles('🌹',50);},300);
+
+// Easter egg
+let taps=0,timer=null;
+document.getElementById('footer-name').addEventListener('click',()=>{
+  taps++;clearTimeout(timer);timer=setTimeout(()=>taps=0,700);
+  if(taps>=3){
+    taps=0;const ov=document.getElementById('egg-overlay');
+    ov.style.display='flex';spawnParticles('🌸',60);
+  }
+});
+
+// Completion confetti burst on load
+setTimeout(()=>{
+  for(let i=0;i<3;i++) setTimeout(()=>spawnParticles('🌸',20),i*400);
+},800);
+
+// Last popup
+const lastMessage = "This is my last effort, made with everything I had.\n\nThank you for every moment we shared together. Every laugh, every memory, every quiet second.\n\nMay you be happy. Truly, deeply happy with your lovely soulmate, and with the life you're building.\n\nYou deserved the best then. You deserve it now. Always.That all for now.Thank you for everything... 🌹";
+
+function openLastPopup(){
+  const popup = document.getElementById('last-popup');
+  const card  = document.getElementById('last-card');
+  const textEl= document.getElementById('last-text');
+  popup.style.display = 'flex';
+  textEl.innerHTML = '';
+  spawnParticles('🌹', 30);
+
+  // Typewriter
+  const lines = lastMessage.split('\n');
+  let fullText = '';
+  lines.forEach(line => { fullText += (line === '' ? '\n' : line + '\n'); });
+  const chars = fullText.split('');
+  let i = 0;
+  const iv = setInterval(()=>{
+    const ch = chars[i++];
+    if(ch === '\n'){
+      textEl.appendChild(document.createElement('br'));
+      if(chars[i]==='\n'){ textEl.appendChild(document.createElement('br')); i++; }
+    } else {
+      textEl.appendChild(document.createTextNode(ch));
+    }
+    if(i >= chars.length) clearInterval(iv);
+  }, 28);
+
+  setTimeout(()=>{ card.style.transform='scale(1)'; card.style.opacity='1'; }, 50);
+}
+
+function closeLastPopup(){
+  const popup = document.getElementById('last-popup');
+  const card  = document.getElementById('last-card');
+  card.style.transform='scale(.9)'; card.style.opacity='0';
+  setTimeout(()=>popup.style.display='none', 400);
+  spawnParticles('🌸', 20);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter III — The Memories</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{animation:zoomIn .6s cubic-bezier(.34,1.1,.64,1) forwards;}
+.gallery-grid{columns:2;column-gap:.8rem;}
+@media(min-width:480px){.gallery-grid{columns:3;}}
+.polaroid-outer{break-inside:avoid;margin-bottom:.8rem;}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<canvas id="stars"></canvas><canvas id="petals"></canvas>
+<div id="quest-hud" style="font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.18em;color:#C470A0;"><span>CHAPTER</span><div style="display:flex;gap:.5rem;"><div class="hud-dot" id="dot-0"></div><div class="hud-dot" id="dot-1"></div><div class="hud-dot" id="dot-2"></div><div class="hud-dot" id="dot-3"></div></div></div>
+<div id="music-bar"><div class="vinyl" id="vinyl"></div><div><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.8rem;color:#C2006B;">Now Playing</p><p style="font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#C470A0;">Our Song 🎵</p></div><button onclick="toggleMusic()" style="width:30px;height:30px;border-radius:50%;background:#E91E8C;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg id="music-icon" width="12" height="12" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" fill="white"/><rect x="14" y="5" width="4" height="14" fill="white"/></svg></button></div>
+<audio id="audioEl" src="lagu.mp3" loop preload="auto"></audio>
+
+<!-- Special photo overlay -->
+<div id="sp-overlay" style="position:fixed;inset:0;z-index:500;background:rgba(61,0,40,.96);display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:2rem;text-align:center;">
+  <button onclick="document.getElementById('sp-overlay').style.display='none';" style="position:absolute;top:1.2rem;right:1.4rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer;opacity:.6;">✕</button>
+  <div style="font-size:1.8rem;letter-spacing:.5rem;animation:heartbeat 1.2s infinite;">🌹 🌸 🌹</div>
+  <img id="sp-img" src="" style="max-width:88vw;max-height:65vh;object-fit:contain;border:8px solid white;box-shadow:0 0 80px rgba(0,0,0,.5);">
+  <p id="sp-caption" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:rgba(249,184,216,.85);max-width:360px;line-height:1.7;"></p>
+</div>
+
+<div style="position:relative;z-index:2;">
+<div style="min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 1.5rem 2rem;">
+  <span style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#C2006B;background:rgba(245,230,200,.5);border:1px solid #F5E6C8;padding:.3rem .9rem;border-radius:4px;margin-bottom:1.2rem;display:inline-block;" class="reveal">Chapter III</span>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,8vw,5rem);font-weight:300;color:#C2006B;line-height:1.1;" class="reveal">The <em style="color:#E91E8C;">Memories</em></h1>
+  <div style="height:1px;width:40px;background:#F9B8D8;margin:1rem auto;" class="reveal"></div>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#C470A0;font-size:1.05rem;max-width:400px;line-height:1.7;" class="reveal">"Flip each photo there's something written on the other side. 🌸<br>The last one is a little more special."</p>
+</div>
+
+<!-- GALLERY -->
+<div style="max-width:640px;margin:0 auto;padding:0 1.2rem 3rem;text-align:center;">
+  <button id="tap-btn" style="display:inline-flex;align-items:center;gap:.7rem;background:white;border:2px solid #F9B8D8;border-radius:999px;padding:1rem 2.2rem;font-family:'Cormorant Garamond',serif;font-style:italic;color:#C2006B;font-size:1.15rem;cursor:pointer;transition:all .3s;box-shadow:0 4px 20px rgba(233,30,140,.08);margin-bottom:2rem;" onmouseover="this.style.background='#FDE8F3'" onmouseout="this.style.background='white'" class="reveal">
+    <span style="animation:heartbeat 1.5s ease-in-out infinite;">🌸</span>
+    Open the memories
+    <span style="animation:heartbeat 1.5s ease-in-out infinite;">🌸</span>
+  </button>
+  <div id="gallery-grid" class="gallery-grid" style="display:none;"></div>
+
+</div>
+
+<!-- QUEST 4 -->
+<div style="max-width:480px;margin:0 auto;padding:0 1.5rem 6rem;text-align:center;">
+  <div style="height:1px;background:linear-gradient(to right,transparent,rgba(249,184,216,.5),transparent);margin-bottom:2.5rem;" class="reveal"></div>
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#C2006B;font-weight:300;margin-bottom:2rem;" class="reveal">Chapter <em style="color:#E91E8C;">IV</em> — The Gratitude</h3>
+  <div class="parchment" style="border-radius:22px;padding:2rem 1.8rem;" class="reveal">
+    <div style="font-size:2.5rem;margin-bottom:.8rem;animation:lockBob .8s ease-in-out infinite alternate;">💌</div>
+    <p style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#C470A0;margin-bottom:.4rem;">Quest IV — The Final Seal</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#3D0028;font-size:1rem;margin-bottom:.4rem;">"Tap the symbols in the right order to unlock the final chapter."</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#E91E8C;font-size:.95rem;margin-bottom:1rem;">💗 → ⭐ → 🌸 → 🌙</p>
+    <div id="sym-seq" style="display:flex;justify-content:center;gap:.4rem;min-height:36px;margin-bottom:1rem;flex-wrap:wrap;"></div>
+    <div style="display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button onclick="tapSym('💗')" style="width:52px;height:52px;border-radius:50%;border:2px solid #F9B8D8;background:white;font-size:1.4rem;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='#E91E8C';this.style.background='#FDE8F3'" onmouseout="this.style.borderColor='#F9B8D8';this.style.background='white'">💗</button>
+      <button onclick="tapSym('🌙')" style="width:52px;height:52px;border-radius:50%;border:2px solid #F9B8D8;background:white;font-size:1.4rem;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='#E91E8C';this.style.background='#FDE8F3'" onmouseout="this.style.borderColor='#F9B8D8';this.style.background='white'">🌙</button>
+      <button onclick="tapSym('🌸')" style="width:52px;height:52px;border-radius:50%;border:2px solid #F9B8D8;background:white;font-size:1.4rem;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='#E91E8C';this.style.background='#FDE8F3'" onmouseout="this.style.borderColor='#F9B8D8';this.style.background='white'">🌸</button>
+      <button onclick="tapSym('⭐')" style="width:52px;height:52px;border-radius:50%;border:2px solid #F9B8D8;background:white;font-size:1.4rem;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='#E91E8C';this.style.background='#FDE8F3'" onmouseout="this.style.borderColor='#F9B8D8';this.style.background='white'">⭐</button>
+    </div>
+    <div style="display:flex;gap:.6rem;justify-content:center;">
+      <button onclick="checkSyms()" style="background:#E91E8C;border:none;border-radius:12px;padding:.75rem 1.6rem;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:white;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='#C2006B'" onmouseout="this.style.background='#E91E8C'">Confirm ✦</button>
+      <button onclick="resetSyms()" style="border:1.5px solid #F9B8D8;background:none;border-radius:12px;padding:.75rem 1.2rem;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#C470A0;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='#E91E8C';this.style.color='#E91E8C'" onmouseout="this.style.borderColor='#F9B8D8';this.style.color='#C470A0'">Reset</button>
+    </div>
+    <p id="sym-msg" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;text-align:center;margin-top:.7rem;min-height:1.2em;color:#ef4444;"></p>
+  </div>
+</div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+initStars();initPetals();initCursor();initProgress();initHUD(2);initMusic(true);
+setTimeout(initReveal,200);
+
+// Gallery — static src photos
+const TILTS=[-4,-2,-3.5,2,3,-1.5,4,1.5,-2.5,3.5,-3,2.5];
+const PHOTOS=[
+  {src:'photo1.jpg', back:'a smile I will never forget ✨',       special:false},
+  {src:'photo2.jpg', back:'a moment I still think about 🌸',      special:false},
+  {src:'photo3.jpg', back:'one of the happiest days 🌹',           special:false},
+  {src:'photo4.jpg', back:'the most beautiful memory 💫',          special:false},
+  {src:'photo5.jpg', back:'always beautiful, inside and out 💗',   special:false},
+  {src:'photo_special.jpg', back:'🌹 the one that meant the most', special:true },
+];
+
+function makePolaroid(data, idx){
+  const tilt=TILTS[idx%TILTS.length];
+  const outer=document.createElement('div');outer.className='polaroid-outer';
+  const wrap=document.createElement('div');wrap.className='polaroid-wrap';wrap.style.setProperty('--tilt',tilt+'deg');
+  const fc=document.createElement('div');fc.className='flip-card';
+  const fi=document.createElement('div');fi.className='flip-inner';fi.style.cssText='position:relative;';
+
+  // front
+  const front=document.createElement('div');front.className='flip-face';front.style.cssText='background:white;padding:8px 8px 28px;box-shadow:0 6px 20px rgba(44,26,34,.1);border-radius:3px;position:relative;'+(data.special?'border:2px solid #F9B8D8;':'');
+  if(data.special){const b=document.createElement('div');b.style.cssText='position:absolute;top:-8px;right:-6px;background:#E91E8C;color:white;font-family:"Cinzel",serif;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;z-index:2;';b.textContent='✨ special';front.appendChild(b);}
+  const img=document.createElement('img');img.src=data.src;img.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;display:block;';
+  front.appendChild(img);
+
+  // back
+  const back=document.createElement('div');back.className='flip-face flip-back';back.style.cssText='position:absolute;inset:0;background:linear-gradient(135deg,#FDE8F3,white);padding:.8rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;box-shadow:0 6px 20px rgba(44,26,34,.1);border-radius:3px;';
+  const bt=document.createElement('div');bt.style.cssText='font-family:"Cormorant Garamond",serif;font-style:italic;font-size:.85rem;color:#C470A0;text-align:center;line-height:1.5;width:100%;';
+  bt.textContent=data.back;
+  const hint=document.createElement('p');hint.style.cssText='font-family:"Cinzel",serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:#F9B8D8;margin-top:.3rem;';hint.textContent='tap to see photo';
+  back.appendChild(bt);back.appendChild(hint);
+
+  fi.appendChild(front);fi.appendChild(back);fc.appendChild(fi);wrap.appendChild(fc);outer.appendChild(wrap);
+
+  // Start pre-flipped — ayat nampak dulu
+  fc.classList.add('flipped');
+
+  fc.addEventListener('click',function(){
+    if(data.special&&this.classList.contains('flipped')){
+      // Special: tap dari belakang → bukak overlay
+      document.getElementById('sp-img').src=data.src;
+      document.getElementById('sp-caption').textContent=data.back;
+      document.getElementById('sp-overlay').style.display='flex';return;
+    }
+    this.classList.toggle('flipped');
+  });
+  document.getElementById('gallery-grid').appendChild(outer);
+}
+
+document.getElementById('tap-btn').addEventListener('click',function(){
+  this.style.display='none';
+  document.getElementById('gallery-grid').style.display='block';
+  PHOTOS.forEach((p,i)=>makePolaroid(p,i));
+});
+document.getElementById('sp-overlay').addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
+
+// Symbol quest
+let syms=[];
+const CORRECT=['💗','⭐','🌸','🌙'];
+function tapSym(s){
+  if(syms.length>=4)return;syms.push(s);
+  const seq=document.getElementById('sym-seq');
+  const pip=document.createElement('div');pip.style.cssText='width:30px;height:30px;border-radius:50%;border:1px solid #F9B8D8;background:white;display:flex;align-items:center;justify-content:center;font-size:.9rem;';
+  pip.textContent=s;seq.appendChild(pip);
+}
+function resetSyms(){syms=[];document.getElementById('sym-seq').innerHTML='';}
+function checkSyms(){
+  const msg=document.getElementById('sym-msg');
+  if(JSON.stringify(syms)===JSON.stringify(CORRECT)){
+    msg.style.color='#27ae60';msg.textContent='✨ The seal is broken! Opening final chapter...';
+    spawnParticles('🌹',50);setTimeout(()=>navigateTo('chapter4.html'),900);
+  } else {
+    resetSyms();msg.textContent='💔 Not quite... try again';spawnParticles('💔',5);
+    const box=document.querySelector('.parchment:last-child');box.style.animation='shake .4s ease';setTimeout(()=>box.style.animation='',500);
+  }
+}
+</script>
+</body>
+</html>
